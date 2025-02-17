@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Course, sortCoursesBySeqNo} from '../model/course';
-import {interval, noop, Observable, of, throwError, timer} from 'rxjs';
-import {catchError, delay, delayWhen, filter, finalize, map, retryWhen, shareReplay, tap} from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {CourseDialogComponent} from '../course-dialog/course-dialog.component';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import { CoursesService } from '../services/courses.service';
 
 
 @Component({
@@ -15,43 +13,26 @@ import {CourseDialogComponent} from '../course-dialog/course-dialog.component';
 })
 export class HomeComponent implements OnInit {
 
-  beginnerCourses: Course[];
+  beginnerCourses$: Observable<Course[]>; // these are now not mutable objects.
 
-  advancedCourses: Course[];
+  advancedCourses$: Observable<Course[]>; // these are now not mutable objects.
 
-
-  constructor(private http: HttpClient, private dialog: MatDialog) {
-
+  constructor(private coursesService: CoursesService) {
   }
 
   ngOnInit() {
-
-    this.http.get('/api/courses')
-      .subscribe(
-        res => {
-
-          const courses: Course[] = res["payload"].sort(sortCoursesBySeqNo);
-
-          this.beginnerCourses = courses.filter(course => course.category == "BEGINNER");
-
-          this.advancedCourses = courses.filter(course => course.category == "ADVANCED");
-
-        });
-
+    this.reloadCourses()
   }
 
-  editCourse(course: Course) {
-
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "400px";
-
-    dialogConfig.data = course;
-
-    const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
-
+  reloadCourses() {
+      const courses$ = this.coursesService.loadAllCourses()
+      .pipe(
+        map(courses => courses.sort(sortCoursesBySeqNo))
+      );
+    //courses$.subscribe(values => console.log(values));
+    // the higher the number of subscriptions, higher the number of API calls.
+    this.beginnerCourses$ = courses$.pipe( map(courses => courses.filter(course => course.category === 'BEGINNER')));
+    this.advancedCourses$ = courses$.pipe( map(courses => courses.filter(course => course.category === 'ADVANCED')));
   }
 
 }
