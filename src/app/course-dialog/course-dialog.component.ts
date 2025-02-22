@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, Inject} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import {Course} from "../model/course";
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
@@ -8,7 +8,6 @@ import {throwError} from 'rxjs';
 import { CoursesService } from '../services/courses.service';
 import { LoadingService } from '../loading/loading.service';
 import { MessagesService } from '../messages/messages.service';
-import e from 'express';
 
 @Component({
     selector: 'course-dialog',

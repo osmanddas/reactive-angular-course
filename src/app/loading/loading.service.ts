@@ -20,7 +20,7 @@ export class LoadingService {
     }
 
     constructor(){
-        console.log('creating LoadingService instance.')
+        console.log('LoadingService Constructor...')
     }
 
     loadingOn() {

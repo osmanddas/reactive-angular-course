@@ -1,8 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import { LoadingService } from './loading/loading.service';
-import { MessagesService } from './messages/messages.service';
-
-
 
 @Component({
     selector: 'app-root',
@@ -10,23 +6,19 @@ import { MessagesService } from './messages/messages.service';
     styleUrls: ['./app.component.css'],
     standalone: false,
     providers: [
-      LoadingService,
-      MessagesService
     ]
 })
 export class AppComponent implements  OnInit {
 
     constructor() {
-
+      console.log('AppComponent Constructor...')
     }
 
     ngOnInit() {
-
-
+      console.log('AppComponent ngOnInit()...')
     }
 
   logout() {
-
   }
 
 }
