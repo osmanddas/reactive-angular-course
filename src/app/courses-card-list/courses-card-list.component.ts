@@ -31,7 +31,7 @@ export class CoursesCardListComponent implements OnInit {
     dialogConfig.width = "400px";
     dialogConfig.data = course;
 
-    const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig); // opened by material dialog
     
     dialogRef.afterClosed()
       .pipe(
