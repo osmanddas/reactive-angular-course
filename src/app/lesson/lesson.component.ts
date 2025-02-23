@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Lesson } from '../model/lesson';
 
 @Component({
     selector: 'lesson',
@@ -6,7 +7,16 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./lesson.component.css'],
     standalone: false
 })
-export class LessonComponent  {
+export class LessonComponent implements OnInit {
 
+    @Input() activeLesson: Lesson;
+
+    constructor(){
+        console.log('LessonComponent Constructor...')
+    }
+
+    ngOnInit(): void {
+        console.log('LessonComponent ngOnInit()...')
+    }
 
 }

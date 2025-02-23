@@ -1,1 +1,10 @@
-<p>lesson works!</p>
+
+<div class="lesson-detail">
+    <h3>{{activeLesson.description}}</h3>
+    <h5>Duration: {{activeLesson.duration}}</h5>
+    <h5>Video Id: {{activeLesson.videoId}}</h5>
+
+    <iframe width="400" height="220" frameborder="0" allowfullscreen [src]="('http://www.youtube.com/embed/' + activeLesson?.videoId) | safeUrl">
+
+    </iframe>
+</div>
