@@ -5,9 +5,9 @@ import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import moment from 'moment';
 import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import { CoursesService } from '../services/courses.service';
 import { LoadingService } from '../loading/loading.service';
 import { MessagesService } from '../messages/messages.service';
+import { CoursesStore } from '../services/courses.store';
 
 @Component({
     selector: 'course-dialog',
@@ -30,8 +30,9 @@ export class CourseDialogComponent implements AfterViewInit {
         private fb: FormBuilder, 
         private dialogRef: MatDialogRef<CourseDialogComponent>, 
         @Inject(MAT_DIALOG_DATA) course:Course,
-        private courseService: CoursesService,
-        private loadingService: LoadingService,
+        //private courseService: CoursesService,
+        private coursesStore: CoursesStore,
+        //private loadingService: LoadingService,
         private messagesService: MessagesService        
         // Note that although loadingService, and messagesService are declared at the applicaiton root level (app component)
         // however, the CourseDialogComponent is opened by Material Dialog which is not under app root. Hence we are giving 
@@ -54,7 +55,11 @@ export class CourseDialogComponent implements AfterViewInit {
     save() {
       const changes = this.form.value;
 
-      const saveCourses$ = this.courseService.saveCourse(this.course.id, changes)
+      const saveCourses$ = this.coursesStore.saveCourse(this.course.id, changes)
+
+      /*
+
+      // Error handling won't work here as we are closing the dialog immediately after save is clicked.
       .pipe(
         catchError(err => {
             const message = "Could not save Course";
@@ -63,15 +68,22 @@ export class CourseDialogComponent implements AfterViewInit {
             return throwError(err)
         })
       );
-
+        */
       /*
       this.courseService.saveCourse(this.course.id, changes).subscribe(
         (val) => this.dialogRef.close(val)
       )*/
-          
+      
+    /*
+    // LoadingService will no longer be called from the Dialog to improve user experience as loading blocks users to perform activity.
+
       this.loadingService.showLoaderUntilCompleted(saveCourses$).subscribe(
         (val) => this.dialogRef.close(val)
-      )
+    )*/
+
+      // subscribe to the Observable now since call to the loading was eliminated.
+      saveCourses$.subscribe()
+      this.dialogRef.close(changes)
 
     }
 

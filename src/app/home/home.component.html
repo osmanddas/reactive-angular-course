@@ -6,11 +6,12 @@
     <mat-tab-group>
 
         <mat-tab label="Beginners">
-          <courses-card-list [courses]="beginnerCourses$ | async" (courseChanged) ="reloadCourses()"></courses-card-list>
+          <courses-card-list [courses]="beginnerCourses$ | async"></courses-card-list> 
+          <!-- (courseChanged) ="reloadCourses()" ==> not required as we are not reloading courses with store impl. -->
         </mat-tab>
 
         <mat-tab label="Advanced">
-          <courses-card-list [courses]="advancedCourses$ | async" (courseChanged) ="reloadCourses()"></courses-card-list>
+          <courses-card-list [courses]="advancedCourses$ | async"></courses-card-list>
         </mat-tab>
 
     </mat-tab-group>
