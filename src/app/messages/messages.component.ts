@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
 import { MessagesService } from './messages.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class MessagesComponent implements OnInit {
     console.log("MessagesComponent ngOnInit()...");
 
     this.errors$ = this.messagesService.errors$.pipe( 
-      tap(() => { this.showMessages = true; console.log('value of showMessages flag:', this.showMessages) } )   
+      tap(() => { this.showMessages = true; console.log('value of showMessages flag:', this.showMessages) } )
     )
   }
 

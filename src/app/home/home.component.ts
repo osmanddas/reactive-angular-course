@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Course} from '../model/course';
 import {Observable} from 'rxjs';
 import { CoursesStore } from '../services/courses.store';
@@ -10,7 +10,7 @@ import { CoursesStore } from '../services/courses.store';
     styleUrls: ['./home.component.css'],
     standalone: false
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   beginnerCourses$: Observable<Course[]>; // these are now not mutable objects.
 
@@ -23,6 +23,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     console.log('HomeComponent ngOnInit()...')
     this.reloadCourses()
+  }
+
+  ngOnDestroy() {
+    console.log('HomeComponent ngOnDestroy()...')
   }
 
   reloadCourses() {
