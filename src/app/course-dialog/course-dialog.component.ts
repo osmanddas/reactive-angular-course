@@ -38,6 +38,7 @@ export class CourseDialogComponent implements AfterViewInit {
         // however, the CourseDialogComponent is opened by Material Dialog which is not under app root. Hence we are giving 
         // CourseDialogComponent different instances of these services..
     ) {
+        console.log('CourseDialogComponent Constructor...')
         this.course = course;
 
         this.form = fb.group({
@@ -50,6 +51,7 @@ export class CourseDialogComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
+        console.log('CourseDialogComponent ngAfterViewInit()...')
     }
 
     save() {
