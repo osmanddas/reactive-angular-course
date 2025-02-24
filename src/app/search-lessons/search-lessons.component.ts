@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Course} from '../model/course';
 import {
@@ -22,6 +22,7 @@ import { CoursesService } from '../services/courses.service';
     selector: 'course',
     templateUrl: './search-lessons.component.html',
     styleUrls: ['./search-lessons.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class SearchLessonsComponent implements OnInit {
