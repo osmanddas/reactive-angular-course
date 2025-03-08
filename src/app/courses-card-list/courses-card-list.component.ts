@@ -16,10 +16,12 @@ export class CoursesCardListComponent implements OnInit {
   @Input() courses: Course[] = [];
   @Output() private courseChanged = new EventEmitter();
 
-  constructor(private dialog: MatDialog){}
+  constructor(private dialog: MatDialog){
+    console.log('CoursesCardListComponent Constructor...')
+  }
 
   ngOnInit(): void {
-      
+      console.log('CoursesCardListComponent ngOnInit()...')
   }
 
   editCourse(course: Course) {

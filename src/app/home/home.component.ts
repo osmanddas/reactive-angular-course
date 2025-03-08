@@ -24,9 +24,11 @@ export class HomeComponent implements OnInit {
     private loadingService: LoadingService,
     private messagesService: MessagesService
   ) {
+    console.log('HomeComponent Constructor...')
   }
 
   ngOnInit() {
+    console.log('HomeComponent ngOnInit()...')
     this.reloadCourses()
   }
 

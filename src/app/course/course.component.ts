@@ -30,16 +30,13 @@ export class CourseComponent implements OnInit {
   lessons: Lesson[];
 
   constructor(private route: ActivatedRoute) {
-
+    console.log('Course Constructor...')
 
   }
 
   ngOnInit() {
-
-
-
+    console.log('Course ngOnInit()...')
   }
-
 
 }
 

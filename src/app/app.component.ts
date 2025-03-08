@@ -17,16 +17,14 @@ import { MessagesService } from './messages/messages.service';
 export class AppComponent implements  OnInit {
 
     constructor() {
-
+      console.log('AppComponent Constructor...')
     }
 
     ngOnInit() {
-
-
+      console.log('AppComponent ngOnInit()...')
     }
 
   logout() {
-
   }
 
 }
