@@ -5,7 +5,8 @@ import { concatMap, finalize, tap } from "rxjs/operators";
 @Injectable()
 export class LoadingService {
 
-    // Subject is similar to Observable, with a difference that it can emit value. the BahaviorSubject remembers the last value emitted.
+    // Subject is similar to Observable, with a difference that it can emit value. 
+    // the BahaviorSubject remembers the last value emitted.
     private loadingSubject = new BehaviorSubject<boolean>(false); 
 
     loading$: Observable<boolean> = this.loadingSubject.asObservable();
